@@ -6,38 +6,75 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <!-- <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
         <!-- My style -->
-        <link href="assets/css/style.css" rel="stylesheet" media="screen">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
     </head>
     <body>
-          <div class="container">
+      
 
-            <nav class="navbar navbar-default">
-              <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                  <a class="navbar-brand" href="#">Dictionnaire</a>
-                </div>
-                <div class="navbar-form navbar-right" role="search">
-                  <div class="form-group">
-                    <input type="text" id="searchedWord" class="form-control" placeholder="Rechercher">
-                  </div>
-                  <button type="button" class="btn btn-default" onclick="getWordDescription()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                </div>
+
+      <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal">Dictionnaire jeux des mots</h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+          <a class="p-2 text-dark" href="#"> </a>
+          <a class="p-2 text-dark" href="#"> </a>
+          <a class="p-2 text-dark" href="#"> </a>
+          <a class="p-2 text-dark" href="#"> </a>
+        </nav>
+        <!-- <a class="btn btn-outline-primary" href="#">Sign up</a> -->
+      </div>
+      
+      <div class="container">
+
+        <div class="card">
+          <h5 class="card-header">Chercher</h5>
+          <div class="card-body">
+            <h5 class="card-title">Veuillez taper le mot chercher</h5>
+            
+            <div class="navbar-form navbar-center" role="search">
+              <div class="form-group">
+                <input type="text" id="searchedWord" class="form-control" placeholder="Rechercher">
               </div>
-            </nav>
-            <i id="spinner" style="display:none;" class="fa fa-spinner fa-5x fa-pulse"></i>
-            <div id="ba">
+              <button type="button" class="btn btn-success" onclick="getWordDescription()">Chercher</button>
 
             </div>
           </div>
-          
+        </div>
+
+        <i id="spinner" style="display:none;" class="fa fa-spinner fa-5x fa-pulse"></i>
+        <div id="ba">
+
+        </div>
+        </div>
+        
+
+     
           <footer>
               <script src="http://code.jquery.com/jquery.js"></script>
-              <script src="assets/js/bootstrap.min.js"></script>
+              <!-- <script src="assets/js/bootstrap.min.js"></script> -->
               <script src="assets/js/parser.js"></script>
+
+
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+              <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+              
           </footer>
       </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
