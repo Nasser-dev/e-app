@@ -8,6 +8,7 @@ $(document).ready(function(){
     })
 })
 
+
 function getWordDescription() {
     document.getElementById("ba").innerHTML = "";
     document.getElementById("spinner").style.display = "";
