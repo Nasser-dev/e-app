@@ -14,7 +14,7 @@ function getWordDescription() {
     var word = document.getElementById("searchedWord").value;
     
     $.ajax({
-        url: 'http://localhost/responsive/server/index.php',
+        url: 'http://localhost/e-app/server/index.php',
         type: 'GET',
         data: 'word=' + word,
 
