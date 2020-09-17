@@ -1,5 +1,26 @@
 <?php
 
+// Récuperer les données depuis le cache
+function getDataFromCache($string) {
+	// Vérification de l'existance du fichier
+	if (file_exists("cache/".$string.".cache")) {
+		// Si le fichier existe, récuperation du contenu
+		$content = file_get_contents("cache/".$string.".cache");
+
+		// Si il y'a eu un problème lors de la récuperation, on retourne false
+		if ($content === FALSE) {
+			echo "une erreur est survenu, veuillez réessayer !";
+			return "GET_DATA_ERROR";
+		}
+	
+		// Si tous s'est bien passé, on retourne le contenu
+		return $content;
+	} else {
+		// Si le fichier n'existe pas, on retourne un message d'erreur
+		return "FILE_NOT_FOUND";
+	}
+}
+
 // Récupépration des données retournées par le site jeuxdemots
 function getDataFromJDM($string) {
 	// Si la chaine contient plusieurs mot, les espaces blancs sont remplacé par le caractère "+" dans le lien.
@@ -14,22 +35,21 @@ function getDataFromJDM($string) {
 	
 	if ($content === FALSE) {
 		echo "une erreur est survenu, veuillez réessayer !";
-		return false;
+		return "GET_DATA_ERROR";
 	}
 
-	return $content;
+	return utf8_encode($content);
 }
 
 // Retourne la définition du mot
 function getDefinitions($content) {
-	return preg_replace('<br />', "def", utf8_encode(explode("</def>", explode("<def>", $content)[1])[0]), 1);
+	return "<def>".explode("</def>", explode("<def>", $content)[1])[0]."</def>";
 }
 
 // Retourne la liste des entrés et des relations (entrantes et sortantes)
 function getEntriesAndRelations($content) {
 	$arrayEntriesAndRelations = array();
-	preg_match_all("/(e;[0-9]+;\'[\w\'áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ.>:?! -]+\';[0-9]+;[0-9]+)|(r;[0-9]+;[0-9]+;[0-9]+;[0-9]+;[0-9]+)/", $content, $arrayEntriesAndRelations);
-
+	preg_match_all("/(e;[0-9]+;\'[\w\'áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ.+>=&;:?! -]+\';[0-9]+;[0-9]+.*)|(r;[0-9]+;[0-9]+;[0-9]+;[0-9]+;[0-9]+)/m", $content, $arrayEntriesAndRelations);
 	return $arrayEntriesAndRelations[0];
 }
 
@@ -54,8 +74,9 @@ function parse($string, $content) {
 	$arrayEntriesAndRelations = getEntriesAndRelations($content);
 	if (empty($arrayEntriesAndRelations)) {
 		echo "Le terme '".$string."' est inexistant ou un problème est survenu lors de la récupération des données";
-		return false;
+		return "DATA_IS_EMPTY";
 	}
+	
 	$definition = getDefinitions($content);
 
 	echo $definition;
@@ -63,6 +84,15 @@ function parse($string, $content) {
 	echo "<br><br>";
 
 	foreach ($arrayEntriesAndRelations as $value) {
-		echo utf8_encode($value."<br>");
+		echo $value."<br>";
 	}
+
+	$stringEntriesAndRelations = "<stringEntriesAndRelations>\n".implode("<br>", $arrayEntriesAndRelations);
+	$dataArray = array("definition" => $definition, "nextLine" => "\n", "entrees&relations" => $stringEntriesAndRelations);
+
+	return $dataArray;
+}
+
+function createNewCache($string, $content) {
+	file_put_contents("cache/".$string.".cache", $content);
 }
