@@ -96,3 +96,5 @@ function parse($string, $content) {
 function createNewCache($string, $content) {
 	file_put_contents("cache/".$string.".cache", $content);
 }
+
+//Nasser
