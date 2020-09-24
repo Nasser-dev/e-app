@@ -99,3 +99,5 @@ function createNewCache($string, $content) {
 	$crypteString = sha1($string);
 	file_put_contents("cache/".$string."-".$crypteString.".cache", $content);
 }
+
+//Nasser
