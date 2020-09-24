@@ -4,8 +4,10 @@
 function getDataFromCache($string) {
 	// Vérification de l'existance du fichier
 	if (file_exists("cache/".$string.".cache")) {
+		// Cryptage du string pour bien reconnaitre le nom du fichier rechercher
+		$crypteString = sha1($string);
 		// Si le fichier existe, récuperation du contenu
-		$content = file_get_contents("cache/".$string.".cache");
+		$content = file_get_contents("cache/".$string."-".$crypteString.".cache", $content);
 
 		// Si il y'a eu un problème lors de la récuperation, on retourne false
 		if ($content === FALSE) {
@@ -94,7 +96,6 @@ function parse($string, $content) {
 }
 
 function createNewCache($string, $content) {
-	file_put_contents("cache/".$string.".cache", $content);
+	$crypteString = sha1($string);
+	file_put_contents("cache/".$string."-".$crypteString.".cache", $content);
 }
-
-//Nasser
